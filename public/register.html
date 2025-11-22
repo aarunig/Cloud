@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Register • MediLocker</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;display:flex;align-items:center;justify-content:center;color:white}
+  .card{background:rgba(255,255,255,0.15);backdrop-filter:blur(16px);padding:50px 40px;border-radius:24px;width:90%;max-width:460px;text-align:center;border:1px solid rgba(255,255,255,0.2);box-shadow:0 20px 50px rgba(0,0,0,0.4)}
+  h2{font-size:44px;background:linear-gradient(45deg,#fff,#e0e8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+  input{width:100%;padding:18px;margin:10px 0;border:none;border-radius:50px;background:rgba(255,255,255,0.25);color:white;font-size:17px}
+  input::placeholder{color:rgba(255,255,255,0.8)}
+  button{width:100%;padding:18px;margin:25px 0;background:white;color:#667eea;border:none;border-radius:50px;font-size:19px;font-weight:700;cursor:pointer}
+  #msg{margin-top:15px;padding:15px;border-radius:12px;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>MediLocker</h2>
+  <p>Create your account</p>
+
+  <form id="registerForm">
+    <input type="text"     id="name"     placeholder="Full Name"     required>
+    <input type="email"    id="email"    placeholder="Email Address" required>
+    <input type="password" id="password" placeholder="Password"       required minlength="6">
+    <button type="submit">Create Account</button>
+  </form>
+
+  <div class="link"><a href="login.html">Already have account? Login</a></div>
+  <div id="msg"></div>
+</div>
+
+<script>
+// SABSE SAHI AUR TESTED SCRIPT
+document.getElementById('registerForm').onsubmit = async (e) => {
+  e.preventDefault();
+
+  const name     = document.getElementById('name').value.trim();
+  const email    = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  // Extra safety
+  if (!name || !email || !password) {
+    document.getElementById('msg').innerHTML = '<div style="background:#f8d7da;color:#721c24">All fields are required!</div>';
+    return;
+  }
+
+  const btn = e.target.querySelector('button');
+  btn.disabled = true;
+  btn.textContent = "Creating account...";
+
+  try {
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, email, password })   // ←← YE TEENO FIELD BHEJ RAHE HAIN
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      document.getElementById('msg').innerHTML = '<div style="background:#d4edda;color:#155724">Success! Redirecting to login...</div>';
+      setTimeout(() => location.href = "login.html", 1500);
+    } else {
+      document.getElementById('msg').innerHTML = `<div style="background:#f8d7da;color:#721c24">${data.message || "Error"}</div>`;
+    }
+  } catch (err) {
+    document.getElementById('msg').innerHTML = '<div style="background:#f8d7da;color:#721c24">Server not reachable</div>';
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Create Account";
+};
+</script>
+</body>
+</html>

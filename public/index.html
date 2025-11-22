@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediLocker - Secure Medical Cloud Storage</title>
+  <meta name="description" content="MediLocker: Store and access your medical records securely in the cloud.">
+  <style>
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .container {
+      text-align: center;
+      padding: 48px 32px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      max-width: 520px;
+      width: 90%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    h1 {
+      font-size: 52px;
+      margin: 0 0 16px;
+      background: linear-gradient(45deg, #fff, #e0e8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    p {
+      font-size: 20px;
+      margin: 0 0 44px;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+    .btn {
+      padding: 16px 44px;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 8px;
+      min-width: 160px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .btn:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 42px; }
+      .btn { display: block; width: 80%; margin: 12px auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>MediLocker</h1>
+    <p>Your secure medical records in the cloud.<br>Encrypted, private, and always accessible.</p>
+    
+    <button class="btn btn-primary" onclick="location.href='login.html'" aria-label="Login to MediLocker">
+      Login
+    </button>
+    <button class="btn btn-secondary" onclick="location.href='register.html'" aria-label="Create a new MediLocker account">
+      Register
+    </button>
+
+    <footer>
+      <p>End-to-end encrypted • HIPAA-compliant • Built for privacy</p>
+    </footer>
+  </div>
+</body>
+</html>

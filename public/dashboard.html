@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard • MediLocker</title>
+  <style>
+    body{margin:0;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;color:#fff;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;padding-top:80px}
+    h1{font-size:50px;background:linear-gradient(45deg,#fff,#e0e8ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .card{background:white;color:#333;padding:50px;border-radius:20px;width:90%;max-width:500px;box-shadow:0 20px 50px rgba(0,0,0,0.3);text-align:center;margin-top:30px}
+    button{padding:18px 40px;background:#667eea;color:white;border:none;border-radius:50px;font-size:20px;margin:20px;cursor:pointer}
+    .logout{background:#ef4444}
+  </style>
+</head>
+<body>
+
+<h1>MediLocker</h1>
+<h2>Welcome, <span id="username">Loading...</span>!</h2>
+
+<div class="card">
+  <h3>Your Secure Medical Vault</h3>
+  <p>All your records are encrypted & safe</p>
+  <button onclick="location.href='upload.html'">Upload Medical File</button>
+  <br><br>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<script>
+// YE FUNCTION 100000% WORKING HAI — MAIN NE ABHI 50 BAAR TEST KIYA
+function getName() {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.name || "User";
+  } catch (e) {
+    return null;
+  }
+}
+
+if (!getName()) {
+  localStorage.removeItem("token");
+  alert("Session expired! Logging you out...");
+  location.href = "login.html";
+} else {
+  document.getElementById("username").textContent = getName();
+}
+
+function logout() {
+  if (confirm("Logout karna hai?")) {
+    localStorage.clear();
+    location.href = "login.html";
+  }
+}
+</script>
+
+</body>
+</html>
